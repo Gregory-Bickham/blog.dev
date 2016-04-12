@@ -59,7 +59,7 @@ return array(
 		    'password'  => $_ENV['DB_PASS'],
 		    'charset'   => 'utf8',
 		    'collation' => 'utf8_unicode_ci',
-		    'prefix'    => '',
+		    'prefix'    => ' ',
 		),
 
 		'pgsql' => array(

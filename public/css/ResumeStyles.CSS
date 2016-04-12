@@ -1,0 +1,60 @@
+/*Style sheet for resume*/
+
+#container1 {
+	position: relative;
+}
+
+
+.starter-template {
+  text-align: left;
+  margin-top: 150px;
+}
+
+.body_style{
+	
+	background-image: url(/img/bodega_head_north.jpg);
+ 	font-size: 16px;
+ 	background-position: center;
+ 	background-repeat: no-repeat;
+ 	background-attachment: fixed;
+ 	background-size: cover;
+}
+
+.h_style{
+	text-decoration: underline;
+	}
+
+.h_center{
+	text-align: center;
+	}
+
+.p_right{
+	text-align: right;
+}
+
+.profile_pic{
+	border-radius: 25px;
+    background: url(/img/mr-t.jpeg);
+    background-position: center;
+    background-repeat: no-repeat; 
+    width: 400px;
+    height: 250px;
+    background-size: 500px;
+    margin: 70px 70px 20px 20px;
+    float: left;
+}
+	
+.header_style {  
+	font-size: 48px;
+	text-align: center;
+
+}
+
+.section_style{
+	border-radius: 25px;
+	background-color: #ECF6CE;
+}
+.logo_layout{
+    background-position: center;
+    background-repeat: no-repeat;
+}

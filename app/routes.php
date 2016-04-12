@@ -11,7 +11,19 @@
 |
 */
 
-Route::get('/', function()
+
+Route::get('/sayhello/{name}', function($name)
 {
-	return View::make('hello');
+    return "Hello, $name!";
 });
+
+Route::get('/forecast', 'HomeController@forecast');
+
+Route::get('/resume', 'HomeController@showResume');
+
+Route::get('/portfolio', 'HomeController@showPortfolio');
+
+Route::resource('posts', 'PostsController');
+
+
+
