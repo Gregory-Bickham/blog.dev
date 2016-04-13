@@ -9,7 +9,10 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		return "This is an index of all posts";
+		$posts = Post::all();
+		$data = array('posts' => $posts);
+		return View::make('posts.index')->with($data);
+
 	}
 
 
@@ -20,7 +23,7 @@ class PostsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return "Form for creating a new resource";
+		return View::make('posts.create');
 	}
 
 
@@ -29,10 +32,28 @@ class PostsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+
 	public function store()
 	{
-		//
+    	// create the validator
+    	$validator = Validator::make(Input::all(), Post::$rules);
+
+    	// attempt validation
+    	if ($validator->fails()) {
+
+        	return Redirect::back()->withInput()->withErrors($validator);
+
+    	} else {
+        
+        	$post = new Post();
+			$post->title = Input::get('title');
+			$post->body  = Input::get('body');
+			$post->save();
+			return Redirect::action('PostsController.index');
+
+    	}
 	}
+
 
 
 	/**
@@ -43,7 +64,8 @@ class PostsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return "This will return the $id post";
+		$post = Post::find($id);
+		return View::make('posts.show')->with('post', $post);
 	}
 
 

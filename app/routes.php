@@ -25,5 +25,11 @@ Route::get('/portfolio', 'HomeController@showPortfolio');
 
 Route::resource('posts', 'PostsController');
 
+Route::get('orm-test', function ()
+{
+    $posts = Post::all();
+	return $posts;
+});
+
 
 
