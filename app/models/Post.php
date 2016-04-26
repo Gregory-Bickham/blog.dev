@@ -1,6 +1,6 @@
 <?php
 
-class Post extends Eloquent
+class Post extends BaseModel
 {
     public static $rules = array(
     	'title'      => 'required|max:100',
@@ -8,5 +8,11 @@ class Post extends Eloquent
 	);
 
     protected $table = 'posts';
+
+    public function user()
+	{
+    	return $this->belongsTo('User');
+	}
+
 
 }

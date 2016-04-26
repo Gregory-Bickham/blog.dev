@@ -2,107 +2,108 @@
 
 class PostsController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	public function __construct()
+	{
+		$this->beforeFilter('auth');
+	}
+
 	public function index()
 	{
-		$posts = Post::all();
-		$data = array('posts' => $posts);
+		$keyword = Input::get('keyword');
+		
+		if (is_null($keyword)) {
+			
+			$posts = Post::with('user')->paginate(4);	
+		} else{
+
+			$posts = Post::with('user')->where('title', 'LIKE', "%$keyword%")->orWhere('body', 'LIKE', "%$keyword%")->paginate(4);
+		}
+
+		
+		$data = ['posts' => $posts];
 		return View::make('posts.index')->with($data);
 
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
 		return View::make('posts.create');
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-
 	public function store()
 	{
-    	// create the validator
-    	$validator = Validator::make(Input::all(), Post::$rules);
+        $post = new Post();
+        Log::info(Input::all());
+		return $this->validateAndSave($post);
 
-    	// attempt validation
-    	if ($validator->fails()) {
-
-        	return Redirect::back()->withInput()->withErrors($validator);
-
-    	} else {
-        
-        	$post = new Post();
-			$post->title = Input::get('title');
-			$post->body  = Input::get('body');
-			$post->save();
-			return Redirect::action('PostsController.index');
-
-    	}
 	}
 
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
 		$post = Post::find($id);
-		return View::make('posts.show')->with('post', $post);
+		$data = ['post' => $post];
+
+		if(is_null($post))
+		{
+			App::abort(404);
+		}
+		return View::make('posts.show')->with($data);
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
-		return "Show a form for editing a specific post";
+		$post = Post::find($id);
+		$data = ['post' => $post];
+		if(is_null($post))
+		{
+			App::abort(404);
+		}
+		return View::make('posts.edit')->with($data);
 	}
 
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
-		//
+		$post = Post::find($id);
+		if(is_null($post))
+		{
+			App::abort(404);
+		}
+		return $this->validateAndSave($post);
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
-		//
+		$post = Post::find($id);
+
+		if(!$post){
+
+			App::abort(404);
+		}
+
+		
+		Session::flash('successMessage', "The post was succesfully deleted.");
+		$post->delete();
+		return Redirect::action('PostsController@index');
+
 	}
 
+	public function validateAndSave($post)
+	{
+    	$validator = Validator::make(Input::all(), Post::$rules);
+
+    	if ($validator->fails()) {
+
+    		Session::flash('errorMessage', "This post was not succesfully saved.");
+        	return Redirect::back()->withInput()->withErrors($validator);
+    	}
+        
+		$post->title = Input::get('title');
+		$post->body  = Input::get('body');
+		$post->user_id  = Auth::id();
+		$post->save();
+
+		Session::flash('successMessage', "This post was succesfully saved.");
+		return Redirect::action('PostsController@show', $post->id);
+	}
 
 }

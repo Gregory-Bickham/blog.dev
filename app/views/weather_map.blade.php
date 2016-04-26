@@ -15,9 +15,8 @@
     <title>Weather Map</title>
 </head>
 <body>
-	<h1 class="h1style">Weather Application</h1>
 
-	<h1 id="city"></h1>
+	<h1 id="city" class="h1style"></h1>
 	<div id="forecast"></div>
     
     <div id="textField">
@@ -46,7 +45,7 @@
     	lat: lat,
     	lon: long,
 	    units: "imperial",
-	    cnt: "7"
+	    cnt: "5"
 		});
 		days.done(function(data){
 	        $("#city").html(data.city.name);

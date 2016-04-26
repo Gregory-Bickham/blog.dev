@@ -11,7 +11,7 @@
       <div class="profile_pic"></div>
       <div class="starter-template">
         <h1>Gregory Charles Bickham II</h1>
-        <p class="lead">Web Developer</p>
+        <p class="lead">Failed Web Developer</p>
       </div>
 
     </div><!-- /.container -->

@@ -1,26 +1,11 @@
-<nav class="nav navbar-nav navbar-inverse navbar-fixed-bottom">
-	<footer class="navbar-footer">
-    	<div class="container-fluid row">
+<nav class="nav navbar-nav navbar-fixed-bottom">
+	<footer class="navbar-footer footer navbar-inverse">
+    	<div class="container-fluid row center-block">
 
-        	<form class="navbar-form navbar-left" role="search">
-        		<div class="form-group">
-
-          				<input type="text" class="form-control" id="forcedInputSize" placeholder="Search">
-
-           		</div>
-           		<button type="submit" class="btn btn-default">Submit</button>
-      		</form>
-
-      		<a class="navbar-right addPadding" href="index.php"><img src="/img/strickland4.jpeg"></a>
-
-      		<ul class="nav navbar-nav center-block centeredMediaButtons">
-            	<li><a href="http://www.facebook.com" target="_blank"><i class="fa fa-lg fa-facebook"></i></a></li>
-            	<li><a href="http://www.twitter.com" target="_blank"><i class="fa fa-lg fa-twitter"></i></a></li>
-            	<li><a href="http://www.facebook.com" target="_blank"><i class="fa fa-lg fa-google-plus"></i></a></li>
-            	<li><a href="http://www.linkedin.com" target="_blank"><i class="fa fa-lg fa-linkedin"></i></a></li>
-        	</ul>
-      		
-      		
+          {{ Form::open(array('action' => 'PostsController@index', 'method' => 'GET', 'class' => 'navbar-form')) }}
+            <div class='form-group'>{{ Form::text('keyword', NULL, array('placeholder' => 'Search...', 'class' => 'form-control')) }}</div>
+          {{ Form::submit('Submit!', array('class' => 'btn btn-default')) }}
+          {{ Form:: close() }}
 
       	</div>
 	</footer>

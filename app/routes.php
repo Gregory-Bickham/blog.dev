@@ -12,10 +12,7 @@
 */
 
 
-Route::get('/sayhello/{name}', function($name)
-{
-    return "Hello, $name!";
-});
+Route::get('/', 'HomeController@showResume');
 
 Route::get('/forecast', 'HomeController@forecast');
 
@@ -25,11 +22,10 @@ Route::get('/portfolio', 'HomeController@showPortfolio');
 
 Route::resource('posts', 'PostsController');
 
-Route::get('orm-test', function ()
-{
-    $posts = Post::all();
-	return $posts;
-});
+Route::get('/login', 'HomeController@showLogIn');
 
+Route::post('/login', 'HomeController@doLogin');
+
+Route::get('/logout', 'HomeController@logOut');
 
 

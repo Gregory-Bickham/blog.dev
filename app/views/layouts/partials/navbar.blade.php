@@ -1,37 +1,39 @@
-<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+  <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Gregory.Bickham</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-left" href="index.php"><img src="/img/strickland4.jpeg"></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-      <ul class="nav navbar-nav social">
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jump to a section <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-header">Buy/Sell</li>
-            <li><a href="ads.index.php">Propane</a></li>
-            <li><a href="accessories.index.php">Propane Accessories</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Site</li>
-
-            <li><a href="giftshop_index.php">Strickland Gift Shop</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="contact.php">Contact Us</a></li>
-            <li><a href="{{{ action('HomeController@showResume') }}}" target="_blank">Resume</a></li>
+      <a class="navbar-brand" href="#">Gregory Bickham</a>
+      <ul class="nav navbar-nav center-block centeredMediaButtons">
+              <li><a href="http://www.facebook.com" target="_blank"><i class="fa fa-lg fa-facebook"></i></a></li>
+              <li><a href="http://www.twitter.com" target="_blank"><i class="fa fa-lg fa-twitter"></i></a></li>
+              <li><a href="http://www.facebook.com" target="_blank"><i class="fa fa-lg fa-google-plus"></i></a></li>
+              <li><a href="http://www.linkedin.com" target="_blank"><i class="fa fa-lg fa-linkedin"></i></a></li>
           </ul>
-        </li>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        
+        @if (!Auth::check())
+        
+          <li><a href="/login">Log In</a></li>  
+         
+         @else 
+
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="/logout">Log Out</a></li>
+        
+        @endif
+        
+
+        
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div><!--/.nav-collapse -->
+  </div>
 </nav>
+
